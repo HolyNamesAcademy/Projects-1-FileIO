@@ -7,6 +7,7 @@ public class Main {
     Takes commands from the user and executes them. Possible commands are
     'read' - reads a file of weather data into the system
     'write' - writes weather data to a file -- overwrites the file if it exists
+    'sort' - sorts weather data by the hottest to coldest average temperature
     'append' - writes weather data to a file -- appends data to the file if it exists
     'quit' - ends the program
      */
