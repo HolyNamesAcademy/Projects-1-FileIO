@@ -15,7 +15,7 @@ public class Main {
         ArrayList<WeatherData> weatherData = null;
         while (true)
         {
-            System.out.print("Enter a command:");
+            System.out.print("Enter a command: ");
             Scanner sc = new Scanner(System.in);
 
             String command = sc.next().toLowerCase();
@@ -23,7 +23,7 @@ public class Main {
             {
                 case "read":
                 {
-                    System.out.print("Enter the path to the file:");
+                    System.out.print("Enter the path to the file: ");
                     String path = sc.next();
 
                     weatherData = ReadFile(path);
@@ -49,7 +49,7 @@ public class Main {
                         break;
                     }
 
-                    System.out.print("Enter the path to the file:");
+                    System.out.print("Enter the path to the file: ");
                     String path = sc.next();
 
                     WriteFile(path, false, weatherData);
@@ -63,7 +63,7 @@ public class Main {
                         break;
                     }
 
-                    System.out.print("Enter the path to the file:");
+                    System.out.print("Enter the path to the file: ");
                     String path = sc.next();
 
                     WriteFile(path, true, weatherData);
