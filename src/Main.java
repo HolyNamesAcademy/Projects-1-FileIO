@@ -87,7 +87,6 @@ public class Main {
     Reads a file from the given path and puts the information into an ArrayList.
     If the file does not exist, catch the exception, print a message, and return
     an empty (not null) ArrayList — do not rethrow.
-    CSV: split on comma, trim each field, skip lines where parts.length != 3.
      */
     public static ArrayList<WeatherData> ReadFile(String path)
     {
@@ -110,8 +109,7 @@ public class Main {
     }
 
     /*
-    Sorts the given ArrayList from hottest average temperature to coldest average temperature.
-    Hint: Collections.sort(list); Collections.reverse(list); after natural compareTo.
+    Sorts the given ArrayList from hottest average temperature to coldest average temperature
      */
     public static void SortWeatherData(ArrayList<WeatherData> weatherData)
     {
@@ -121,9 +119,9 @@ public class Main {
 
     /*
     Writes the weather data information into the file with the given path.
-    Prefer new FileWriter(path, shouldAppend) wrapped in PrintWriter.
-    Warning: new PrintWriter(stream, boolean)'s boolean is autoFlush, not append.
+    If shouldAppend is false, replace existing contents; if true, append.
     If the file cannot be created, catch the exception, print a message, and do not write.
+    Note: some PrintWriter constructors take a boolean that means autoFlush, not append.
      */
     public static void WriteFile(String path, boolean shouldAppend, ArrayList<WeatherData> weatherData)
     {

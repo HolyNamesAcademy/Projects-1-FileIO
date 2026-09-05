@@ -53,8 +53,8 @@ These are the functions you will implement:
     [City1], [Average Temperature], [Average Humidity]
     [City2], [Average Temperature], [Average Humidity]
 
-  - **SortWeatherData**: Sorts the given ArrayList from hottest average temperature to coldest average temperature. Recommended: `Collections.sort(list);` then `Collections.reverse(list);` after a natural `compareTo` on temperature.
-  - **WriteFile**: Writes the weather data information into the file with the given path. Prefer `new FileWriter(path, shouldAppend)` (or `FileOutputStream` with append) wrapped in `PrintWriter`. **Warning:** `new PrintWriter(stream, boolean)`'s boolean is **autoFlush**, not append. If `shouldAppend` is false, replace the existing contents of the file (if it exists). If `shouldAppend` is true, append to the end. If the file cannot be created, catch the exception, print a message, and do not write.
+  - **SortWeatherData**: Sorts the given ArrayList from hottest average temperature to coldest average temperature.
+  - **WriteFile**: Writes the weather data information into the file with the given path. If `shouldAppend` is false, replace the existing contents; if true, append. Catch create/write failures, print a message, and do not crash. **Note:** some `PrintWriter` constructors take a boolean that means **autoFlush**, not append — check which constructor you use.
 
 - In WeatherData.java:
 
@@ -62,11 +62,11 @@ These are the functions you will implement:
 
     Seattle Wash., 50.2, 37.07
 
-    Do **not** put a newline inside `toString` — add newlines when printing (`println`) or in `WriteFile`.
+    Do **not** put a newline inside `toString` — newlines belong in printing / writing.
 
-  - **compareTo**: Compare by average temperature only (ignore humidity). A hotter city should compare as greater than a colder city (return a positive number). Same temperature → `0`. Then `SortWeatherData` can sort hottest → coldest (for example with `Collections.sort` then `Collections.reverse`). See also: <https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T->
+  - **compareTo**: Compare by average temperature only (ignore humidity). A hotter city should compare as greater than a colder city (return a positive number). Same temperature → `0`. `SortWeatherData` must end up hottest → coldest; how you get there is up to you. See also: <https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T->
 
-**CSV parsing:** Both `City,50.2,37.07` and `City, 50.2, 37.07` are valid. `.trim()` each field after splitting on commas. Skip lines where `parts.length != 3`. The write format uses spaces after commas (see `toString` example above).
+**CSV parsing:** Input lines look like `City,50.2,37.07` or `City, 50.2, 37.07`. After you split on commas, make sure each piece is usable as a number (whitespace can sneak in). Skip malformed lines that do not have three fields. Written output should match the `toString` format above.
 
 ## Committing your Changes and Turning In The Project
 
