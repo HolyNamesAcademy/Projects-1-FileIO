@@ -47,14 +47,14 @@ These are the functions you will implement:
 
 - In Main.java:
 
-  - **ReadFile**: Reads a file from the given path and puts the information into an ArrayList. If the file does not exist, the function catches the exception, prints a message to the console, and return an empty (not null) array.
+  - **ReadFile**: Reads a file from the given path and puts the information into an `ArrayList`. If the file does not exist, catch the exception, **print a message**, and return an **empty** `ArrayList` — do **not** rethrow and do **not** return `null`.
   - **PrintWeatherData**: Prints the weather data ArrayList to the console. Each weather data item should go on a new line:
 
     [City1], [Average Temperature], [Average Humidity]
     [City2], [Average Temperature], [Average Humidity]
 
-  - **SortWeatherData**: Sorts the given ArrayList from hottest average temperature to coldest average temperature
-  - **WriteFile**: Writes the weather data information into the file with the given path. If shouldAppend is false, the function replaces the existing contents of the file (if it exists) with the new weatherData. If shouldAppend is true, the function adds the weather data to the end of the file. If the file cannot be created, the function catches the exception, prints a message to the console, and does not try to write to the file.
+  - **SortWeatherData**: Sorts the given ArrayList from hottest average temperature to coldest average temperature. Recommended: `Collections.sort(list);` then `Collections.reverse(list);` after a natural `compareTo` on temperature.
+  - **WriteFile**: Writes the weather data information into the file with the given path. Prefer `new FileWriter(path, shouldAppend)` (or `FileOutputStream` with append) wrapped in `PrintWriter`. **Warning:** `new PrintWriter(stream, boolean)`'s boolean is **autoFlush**, not append. If `shouldAppend` is false, replace the existing contents of the file (if it exists). If `shouldAppend` is true, append to the end. If the file cannot be created, catch the exception, print a message, and do not write.
 
 - In WeatherData.java:
 
@@ -62,7 +62,11 @@ These are the functions you will implement:
 
     Seattle Wash., 50.2, 37.07
 
+    Do **not** put a newline inside `toString` — add newlines when printing (`println`) or in `WriteFile`.
+
   - **compareTo**: Compare by average temperature only (ignore humidity). A hotter city should compare as greater than a colder city (return a positive number). Same temperature → `0`. Then `SortWeatherData` can sort hottest → coldest (for example with `Collections.sort` then `Collections.reverse`). See also: <https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T->
+
+**CSV parsing:** Both `City,50.2,37.07` and `City, 50.2, 37.07` are valid. `.trim()` each field after splitting on commas. Skip lines where `parts.length != 3`. The write format uses spaces after commas (see `toString` example above).
 
 ## Committing your Changes and Turning In The Project
 
