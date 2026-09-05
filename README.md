@@ -58,11 +58,11 @@ These are the functions you will implement:
 
 - In WeatherData.java:
 
-  - **toString**: Returns a string representation of WeatherData:
+  - **toString**: Returns a string representation of WeatherData with a comma and space between each part. Example:
 
-    [City], [Average Temperature], [Average Humidity]
+    Seattle Wash., 50.2, 37.07
 
-  - **compareTo**: Read the compareTo documentation and implement it here: <https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T->
+  - **compareTo**: Compare by average temperature only (ignore humidity). A hotter city should compare as greater than a colder city (return a positive number). Same temperature → `0`. Then `SortWeatherData` can sort hottest → coldest (for example with `Collections.sort` then `Collections.reverse`). See also: <https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html#compareTo-T->
 
 ## Committing your Changes and Turning In The Project
 
