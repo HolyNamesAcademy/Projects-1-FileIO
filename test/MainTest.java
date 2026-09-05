@@ -44,12 +44,15 @@ public class MainTest {
     public void readFile_readsSampleCsv() {
         ArrayList<WeatherData> data = Main.ReadFile("testresources/sample-weather.csv");
         assertNotNull(data);
-        assertEquals(3, data.size());
+        assertEquals(4, data.size());
         assertEquals("Seattle Wash.", data.get(0).getCity());
         assertEquals(50.2, data.get(0).getAverageTemp(), 0.0001);
         assertEquals(37.07, data.get(0).getAverageHumidity(), 0.0001);
         assertEquals("Miami Fla.", data.get(1).getCity());
         assertEquals("Anchorage Alaska", data.get(2).getCity());
+        assertEquals("Boise Idaho", data.get(3).getCity());
+        assertEquals(50.6, data.get(3).getAverageTemp(), 0.0001);
+        assertEquals(12.19, data.get(3).getAverageHumidity(), 0.0001);
     }
 
     @Test
@@ -122,5 +125,26 @@ public class MainTest {
         assertEquals(2, lines.length);
         assertEquals("Seattle Wash., 50.2, 37.07", lines[0].trim());
         assertEquals("Miami Fla., 75.7, 58.53", lines[1].trim());
+    }
+
+    @Test
+    public void writeThenRead_roundTripPreservesData() throws Exception {
+        Path out = tempDir.resolve("round-trip.csv");
+        ArrayList<WeatherData> original = new ArrayList<>(List.of(
+                new WeatherData("Seattle Wash.", 50.2, 37.07),
+                new WeatherData("Boise Idaho", 50.6, 12.19)
+        ));
+
+        Main.WriteFile(out.toString(), false, original);
+        ArrayList<WeatherData> readBack = Main.ReadFile(out.toString());
+
+        assertNotNull(readBack);
+        assertEquals(original.size(), readBack.size());
+        assertEquals("Seattle Wash.", readBack.get(0).getCity());
+        assertEquals(50.2, readBack.get(0).getAverageTemp(), 0.0001);
+        assertEquals(37.07, readBack.get(0).getAverageHumidity(), 0.0001);
+        assertEquals("Boise Idaho", readBack.get(1).getCity());
+        assertEquals(50.6, readBack.get(1).getAverageTemp(), 0.0001);
+        assertEquals(12.19, readBack.get(1).getAverageHumidity(), 0.0001);
     }
 }

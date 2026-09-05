@@ -28,6 +28,9 @@ public class WeatherData implements Comparable<WeatherData> {
     Returns a string representation of WeatherData:
 
     [City], [Average Temperature], [Average Humidity]
+
+    Example: Seattle Wash., 50.2, 37.07
+    No newline inside toString — newline comes from println/WriteFile.
      */
     public String toString()
     {

@@ -85,8 +85,8 @@ public class Main {
 
     /*
     Reads a file from the given path and puts the information into an ArrayList.
-    If the file does not exist, the function catches the exception, prints a message
-    to the console, and return an empty (not null) array.
+    If the file does not exist, catch the exception, print a message, and return
+    an empty (not null) ArrayList — do not rethrow.
      */
     public static ArrayList<WeatherData> ReadFile(String path)
     {
@@ -119,11 +119,9 @@ public class Main {
 
     /*
     Writes the weather data information into the file with the given path.
-    If shouldAppend is false, the function replaces the existing contents of the file
-    (if it exists) with the new weatherData. If shouldAppend is true, the function
-    adds the weather data to the end of the file.
-    If the file cannot be created, the function catches the exception, prints a message
-    to the console, and does not try to write to the file.
+    If shouldAppend is false, replace existing contents; if true, append.
+    If the file cannot be created, catch the exception, print a message, and do not write.
+    Note: some PrintWriter constructors take a boolean that means autoFlush, not append.
      */
     public static void WriteFile(String path, boolean shouldAppend, ArrayList<WeatherData> weatherData)
     {
